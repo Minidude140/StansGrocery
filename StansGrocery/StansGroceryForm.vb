@@ -9,7 +9,7 @@ Option Explicit On
 
 
 Public Class StansGroceryForm
-    Dim currentrecord() As String
+    Dim currentInventory() As String
     Dim fileName As String = "..\..\Grocery.txt"
     Dim testString As String
 
@@ -26,13 +26,27 @@ Public Class StansGroceryForm
 
     Sub LoadInventoryFile()
         Dim fileNumber As Integer = FreeFile()
-        Dim currentField As String = ""
+        Dim currentLine As String = ""
+        Dim currentFields() As String
+        Dim currentName As String
+        Dim currentLocation As String
+        Dim currentCategory As String
+
 
         Try
             FileOpen(fileNumber, Me.fileName, OpenMode.Input)
             Do Until EOF(fileNumber)
-                currentField = LineInput(fileNumber)
-                testString = testString & currentField
+                'Input the whole line
+                currentLine = LineInput(fileNumber)
+                'replace extra " with empty string
+                currentLine = Replace(currentLine, Chr(34), "")
+                'Split Line into 3 fields
+                currentFields = Split(currentLine, ",")
+                'Clean up each field of extra characters
+                currentName = Replace(currentFields(0), "$$ITM", "")
+                currentLocation = Replace(currentFields(1), "##LOC", "")
+                currentCategory = Replace(currentFields(2), "%%CAT", "")
+                '**Need to Add to Current Inventory array**
             Loop
             FileClose(fileNumber)
         Catch ex As Exception
