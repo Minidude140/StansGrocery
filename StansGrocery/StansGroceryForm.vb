@@ -17,7 +17,7 @@ Public Class StansGroceryForm
     Sub SetDefaults()
         FilterByAisleRadioButton.Checked = True
         DisplayLabel.Text = "No Item Selected."
-        FilterComboBox.SelectedIndex = 0
+        FilterComboBox.SelectedIndex = -1
     End Sub
 
     'Event Handlers
