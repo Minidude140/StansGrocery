@@ -24,9 +24,16 @@ Public Class StansGroceryForm
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
     End Sub
+
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click,
                                                                            ExitContextStripItem.Click,
                                                                            ExitStripMenuItem.Click
+        'Close the program
         Me.Close()
+    End Sub
+
+    Private Sub AboutStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutStripMenuItem.Click
+        'Display the About form to the user
+        AboutForm.Show()
     End Sub
 End Class

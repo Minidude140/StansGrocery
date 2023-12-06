@@ -29,7 +29,7 @@ Partial Class AboutForm
         '
         'AboutCloseButton
         '
-        Me.AboutCloseButton.Location = New System.Drawing.Point(193, 229)
+        Me.AboutCloseButton.Location = New System.Drawing.Point(187, 274)
         Me.AboutCloseButton.Name = "AboutCloseButton"
         Me.AboutCloseButton.Size = New System.Drawing.Size(150, 45)
         Me.AboutCloseButton.TabIndex = 0
@@ -40,8 +40,10 @@ Partial Class AboutForm
         '
         Me.AboutLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AboutLabel.Location = New System.Drawing.Point(28, 22)
+        Me.AboutLabel.MaximumSize = New System.Drawing.Size(475, 249)
+        Me.AboutLabel.MinimumSize = New System.Drawing.Size(475, 249)
         Me.AboutLabel.Name = "AboutLabel"
-        Me.AboutLabel.Size = New System.Drawing.Size(475, 204)
+        Me.AboutLabel.Size = New System.Drawing.Size(475, 249)
         Me.AboutLabel.TabIndex = 1
         Me.AboutLabel.Text = resources.GetString("AboutLabel.Text")
         Me.AboutLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -50,12 +52,10 @@ Partial Class AboutForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(510, 284)
+        Me.ClientSize = New System.Drawing.Size(510, 331)
         Me.Controls.Add(Me.AboutLabel)
         Me.Controls.Add(Me.AboutCloseButton)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.MaximumSize = New System.Drawing.Size(528, 331)
-        Me.MinimumSize = New System.Drawing.Size(528, 331)
         Me.Name = "AboutForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "About"
