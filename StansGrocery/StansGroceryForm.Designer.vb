@@ -41,6 +41,7 @@ Partial Class StansGroceryForm
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SearchContextStripItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitContextStripItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTip = New System.Windows.Forms.ToolTip(Me.components)
         Me.FilterGroupBox.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
@@ -52,6 +53,7 @@ Partial Class StansGroceryForm
         Me.SeachTextBox.Name = "SeachTextBox"
         Me.SeachTextBox.Size = New System.Drawing.Size(326, 22)
         Me.SeachTextBox.TabIndex = 0
+        Me.ToolTip.SetToolTip(Me.SeachTextBox, "Enter Item you are searching for.")
         '
         'SearchButton
         '
@@ -60,6 +62,7 @@ Partial Class StansGroceryForm
         Me.SearchButton.Size = New System.Drawing.Size(105, 30)
         Me.SearchButton.TabIndex = 1
         Me.SearchButton.Text = "&Search"
+        Me.ToolTip.SetToolTip(Me.SearchButton, "Search Inventory for Items.")
         Me.SearchButton.UseVisualStyleBackColor = True
         '
         'ExitButton
@@ -70,6 +73,7 @@ Partial Class StansGroceryForm
         Me.ExitButton.Size = New System.Drawing.Size(123, 40)
         Me.ExitButton.TabIndex = 2
         Me.ExitButton.Text = "E&xit"
+        Me.ToolTip.SetToolTip(Me.ExitButton, "Exit The Program.")
         Me.ExitButton.UseVisualStyleBackColor = True
         '
         'FilterGroupBox
@@ -92,6 +96,7 @@ Partial Class StansGroceryForm
         Me.FilterByAisleRadioButton.TabIndex = 0
         Me.FilterByAisleRadioButton.TabStop = True
         Me.FilterByAisleRadioButton.Text = "By Aisle"
+        Me.ToolTip.SetToolTip(Me.FilterByAisleRadioButton, "Filter Results By Aisle.")
         Me.FilterByAisleRadioButton.UseVisualStyleBackColor = True
         '
         'FilterByCategoryRadioButton
@@ -103,6 +108,7 @@ Partial Class StansGroceryForm
         Me.FilterByCategoryRadioButton.TabIndex = 1
         Me.FilterByCategoryRadioButton.TabStop = True
         Me.FilterByCategoryRadioButton.Text = "By Category"
+        Me.ToolTip.SetToolTip(Me.FilterByCategoryRadioButton, "Filter Results By Category.")
         Me.FilterByCategoryRadioButton.UseVisualStyleBackColor = True
         '
         'DisplayListBox
@@ -113,6 +119,7 @@ Partial Class StansGroceryForm
         Me.DisplayListBox.Name = "DisplayListBox"
         Me.DisplayListBox.Size = New System.Drawing.Size(273, 292)
         Me.DisplayListBox.TabIndex = 4
+        Me.ToolTip.SetToolTip(Me.DisplayListBox, "Inventory Search Results Displayed Here.")
         '
         'DisplayLabel
         '
@@ -122,6 +129,7 @@ Partial Class StansGroceryForm
         Me.DisplayLabel.TabIndex = 5
         Me.DisplayLabel.Text = "Show text for selected Display list box item"
         Me.DisplayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.ToolTip.SetToolTip(Me.DisplayLabel, "Selected Result Displayed Here.")
         '
         'FilterComboBox
         '
@@ -131,6 +139,7 @@ Partial Class StansGroceryForm
         Me.FilterComboBox.Size = New System.Drawing.Size(434, 24)
         Me.FilterComboBox.TabIndex = 6
         Me.FilterComboBox.Text = "Show All"
+        Me.ToolTip.SetToolTip(Me.FilterComboBox, "Select Filter Type.")
         '
         'MenuStrip1
         '
@@ -240,4 +249,5 @@ Partial Class StansGroceryForm
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents SearchContextStripItem As ToolStripMenuItem
     Friend WithEvents ExitContextStripItem As ToolStripMenuItem
+    Friend WithEvents ToolTip As ToolTip
 End Class
