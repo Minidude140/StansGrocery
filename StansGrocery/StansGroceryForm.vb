@@ -27,6 +27,9 @@ Public Class StansGroceryForm
         FilterComboBox.SelectedIndex = -1
     End Sub
 
+    ''' <summary>
+    ''' Loads Grocery.txt and adds contents to three lists
+    ''' </summary>
     Sub LoadInventoryFile()
         Dim fileNumber As Integer = FreeFile()
         Dim currentLine As String = ""
@@ -55,10 +58,24 @@ Public Class StansGroceryForm
                 inventoryCategory.Add(currentCategory)
             Loop
             FileClose(fileNumber)
+            ''Need to fix directory location when file dialog opens
+
+            'Catch ioexception As io.ioexception
+            '    With openfiledialog
+            '        .reset()
+            '        .initialdirectory = ""
+            '        .filename = ""
+            '        .defaultext = ".txt"
+            '        .addextension = True
+            '        .filter = "txt files (*.txt)|*.txt|all files (*.*)|*.*"
+            '        .showdialog()
+            '        Me.filename = filename
+            '    End With
         Catch ex As Exception
 
         End Try
     End Sub
+
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
