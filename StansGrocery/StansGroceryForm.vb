@@ -7,9 +7,10 @@
 Option Strict On
 Option Explicit On
 
+Imports System.Threading
 
 Public Class StansGroceryForm
-    Dim currentInventory() As String
+    Dim currentInventory(1000, 3) As String
     Dim inventoryNames As New List(Of String)
     Dim inventoryLocation As New List(Of String)
     Dim inventoryCategory As New List(Of String)
@@ -60,27 +61,41 @@ Public Class StansGroceryForm
             FileClose(fileNumber)
             ''Need to fix directory location when file dialog opens
 
-            'Catch ioexception As io.ioexception
-            '    With openfiledialog
-            '        .reset()
-            '        .initialdirectory = ""
-            '        .filename = ""
-            '        .defaultext = ".txt"
-            '        .addextension = True
-            '        .filter = "txt files (*.txt)|*.txt|all files (*.*)|*.*"
-            '        .showdialog()
-            '        Me.filename = filename
-            '    End With
+        Catch ioexception As io.ioexception
+            With openfiledialog
+                .reset()
+                .InitialDirectory = "..\"
+                .filename = ""
+                .defaultext = ".txt"
+                .addextension = True
+                .filter = "txt files (*.txt)|*.txt|all files (*.*)|*.*"
+                .showdialog()
+                Me.filename = filename
+            End With
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Sub AddInventoryListToArray()
+        ReDim currentInventory(inventoryNames.Count, 2)
+        For i = 0 To (inventoryNames.Count - 1)
+            currentInventory(i, 0) = inventoryNames(i)
+            currentInventory(i, 1) = inventoryLocation(i)
+            currentInventory(i, 2) = inventoryCategory(i)
+            'System.Threading.Thread.Sleep(1000)
+        Next
+        inventoryNames.Clear()
+        inventoryLocation.Clear()
+        inventoryCategory.Clear()
     End Sub
 
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
         LoadInventoryFile()
-        DisplayLabel.Text = testString
+        AddInventoryListToArray()
+        'DisplayLabel.Text = testString
     End Sub
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click,
