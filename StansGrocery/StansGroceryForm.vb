@@ -10,6 +10,9 @@ Option Explicit On
 
 Public Class StansGroceryForm
     Dim currentInventory() As String
+    Dim inventoryNames As New List(Of String)
+    Dim inventoryLocation As New List(Of String)
+    Dim inventoryCategory As New List(Of String)
     Dim fileName As String = "..\..\Grocery.txt"
     Dim testString As String
 
@@ -46,7 +49,10 @@ Public Class StansGroceryForm
                 currentName = Replace(currentFields(0), "$$ITM", "")
                 currentLocation = Replace(currentFields(1), "##LOC", "")
                 currentCategory = Replace(currentFields(2), "%%CAT", "")
-                '**Need to Add to Current Inventory array**
+                'add inventory items into lists
+                inventoryNames.Add(currentName)
+                inventoryLocation.Add(currentLocation)
+                inventoryCategory.Add(currentCategory)
             Loop
             FileClose(fileNumber)
         Catch ex As Exception
