@@ -81,7 +81,7 @@ Public Class StansGroceryForm
     ''' Adds current inventory names, location, and category lists into current Inventory Array
     ''' </summary>
     Sub AddInventoryListToArray()
-        ReDim currentInventory(inventoryNames.Count, 2)
+        ReDim currentInventory((inventoryNames.Count - 1), 2)
         For i = 0 To (inventoryNames.Count - 1)
             currentInventory(i, 0) = inventoryNames(i)
             currentInventory(i, 1) = inventoryLocation(i)
