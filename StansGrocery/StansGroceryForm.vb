@@ -119,6 +119,7 @@ Public Class StansGroceryForm
             'add the names of the array to the list box
             DisplayListBox.Items.Add(listBoxArray(i, 0))
         Next
+        DisplayListBox.Sorted = True
     End Sub
 
     ''' <summary>
@@ -163,6 +164,9 @@ Public Class StansGroceryForm
 
     End Sub
 
+    ''' <summary>
+    ''' Updates display label containing item, location, and category depeding on selected list box item
+    ''' </summary>
     Sub UpdateDisplayLabel()
         Dim selectedItemName As String
         Dim selectedItemLocation As String
@@ -181,6 +185,11 @@ Public Class StansGroceryForm
         End Select
     End Sub
 
+    ''' <summary>
+    ''' Returns array index for the list item given
+    ''' </summary>
+    ''' <param name="itemName"></param>
+    ''' <returns></returns>
     Function findArrayLocation(itemName As String) As Integer
         Dim itemlocation As Integer
         Dim currentItemName As String
