@@ -38,7 +38,7 @@ Public Class StansGroceryForm
     Sub SetDefaults()
         FilterByAisleRadioButton.Checked = True
         DisplayLabel.Text = "No Item Selected."
-        FilterComboBox.SelectedIndex = -1
+        FilterComboBox.SelectedItem = "Show All"
     End Sub
 
     ''' <summary>
@@ -121,7 +121,10 @@ Public Class StansGroceryForm
         Next
     End Sub
 
-    Sub UpdateDisplayComboBox()
+    ''' <summary>
+    ''' Fills Filter Combo Box with Aisle Numbers or Categories depending on filter radio buttons
+    ''' </summary>
+    Sub UpdateFilterComboBox()
         FilterComboBox.Items.Clear()
         If FilterByAisleRadioButton.Checked Then
             Dim allAisleNumbers As New List(Of Integer)
@@ -166,7 +169,7 @@ Public Class StansGroceryForm
         LoadInventoryFile()
         AddInventoryListToArray()
         UpdateDisplayListBox(currentInventory)
-        UpdateDisplayComboBox()
+        UpdateFilterComboBox()
         'DisplayLabel.Text = testString
     End Sub
 
@@ -184,6 +187,7 @@ Public Class StansGroceryForm
 
     Private Sub FilterByAisleRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles FilterByAisleRadioButton.CheckedChanged
         'if the filter option is changed update combo box
-        UpdateDisplayComboBox()
+        UpdateFilterComboBox()
+        FilterComboBox.SelectedItem = "Show All"
     End Sub
 End Class
