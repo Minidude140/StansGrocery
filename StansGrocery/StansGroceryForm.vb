@@ -17,7 +17,7 @@ Imports System.Threading
 '[]Create display sub that updates formated display label 
 
 '[~]Update list box sub that updates from given array
-'[]Combo Box should contain either aisle numbers or category depending on radio buttons
+'[~]Combo Box should contain either aisle numbers or category depending on radio buttons
 '[]Filter list box from combo box selection
 '[]Filter from search
 
@@ -163,6 +163,19 @@ Public Class StansGroceryForm
 
     End Sub
 
+    Sub UpdateDisplayLabel()
+        Dim selectedItemName As String
+        Dim selectedItemLocation As String
+        Dim selectedItemCategory As String
+        Dim itemArrayLocation As Integer = (DisplayListBox.SelectedIndex)
+
+        selectedItemName = currentInventory(itemArrayLocation, 0)
+        selectedItemLocation = currentInventory(itemArrayLocation, 1)
+        selectedItemCategory = currentInventory(itemArrayLocation, 2)
+
+        DisplayLabel.Text = $"{selectedItemName} is found on aisle {selectedItemLocation} with {selectedItemCategory}"
+    End Sub
+
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
@@ -189,5 +202,9 @@ Public Class StansGroceryForm
         'if the filter option is changed update combo box
         UpdateFilterComboBox()
         FilterComboBox.SelectedItem = "Show All"
+    End Sub
+
+    Private Sub DisplayListBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayListBox.SelectedIndexChanged
+        UpdateDisplayLabel()
     End Sub
 End Class
