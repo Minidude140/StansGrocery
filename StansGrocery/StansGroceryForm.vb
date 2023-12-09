@@ -86,6 +86,10 @@ Public Class StansGroceryForm
             End With
         Catch ex As Exception
         End Try
+        'sort lists alphabetically
+        inventoryNames.Sort()
+        inventoryLocation.Sort()
+        inventoryCategory.Sort()
     End Sub
 
     ''' <summary>
