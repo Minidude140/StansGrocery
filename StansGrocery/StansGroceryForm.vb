@@ -9,6 +9,19 @@ Option Explicit On
 
 Imports System.Threading
 
+'TODO
+'[~]load grocery list, split, and clean up strings
+'[~]Create array from lists and clear lists
+
+'[]Make splash screen
+'[]Create display sub that updates formated display label 
+
+'[]Update list box sub that updates from given array
+'[]Combo Box should contain either aisle numbers or category depending on radio buttons
+'[]Filter list box from combo box selection
+'[]Filter from search
+
+
 Public Class StansGroceryForm
     Dim currentInventory(1000, 3) As String
     Dim inventoryNames As New List(Of String)
@@ -39,7 +52,6 @@ Public Class StansGroceryForm
         Dim currentLocation As String
         Dim currentCategory As String
 
-
         Try
             FileOpen(fileNumber, Me.fileName, OpenMode.Input)
             Do Until EOF(fileNumber)
@@ -59,8 +71,6 @@ Public Class StansGroceryForm
                 inventoryCategory.Add(currentCategory)
             Loop
             FileClose(fileNumber)
-            ''Need to fix directory location when file dialog opens
-
         Catch ioexception As io.ioexception
             With openfiledialog
                 .reset()
@@ -73,12 +83,12 @@ Public Class StansGroceryForm
                 Me.filename = filename
             End With
         Catch ex As Exception
-
         End Try
     End Sub
 
     ''' <summary>
-    ''' Adds current inventory names, location, and category lists into current Inventory Array
+    ''' Adds current inventory names, location, and category lists into current Inventory Array.
+    ''' Clears lists.
     ''' </summary>
     Sub AddInventoryListToArray()
         ReDim currentInventory((inventoryNames.Count - 1), 2)
