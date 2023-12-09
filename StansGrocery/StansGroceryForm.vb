@@ -87,9 +87,9 @@ Public Class StansGroceryForm
         Catch ex As Exception
         End Try
         'sort lists alphabetically
-        inventoryNames.Sort()
-        inventoryLocation.Sort()
-        inventoryCategory.Sort()
+        'inventoryNames.Sort()
+        'inventoryLocation.Sort()
+        'inventoryCategory.Sort()
     End Sub
 
     ''' <summary>
@@ -167,14 +167,31 @@ Public Class StansGroceryForm
         Dim selectedItemName As String
         Dim selectedItemLocation As String
         Dim selectedItemCategory As String
-        Dim itemArrayLocation As Integer = (DisplayListBox.SelectedIndex)
+        Dim itemArrayLocation As Integer = findArrayLocation(DisplayListBox.SelectedItem.ToString)
 
         selectedItemName = currentInventory(itemArrayLocation, 0)
         selectedItemLocation = currentInventory(itemArrayLocation, 1)
         selectedItemCategory = currentInventory(itemArrayLocation, 2)
 
-        DisplayLabel.Text = $"{selectedItemName} is found on aisle {selectedItemLocation} with {selectedItemCategory}"
+        Select Case True
+            Case selectedItemCategory = "" Or selectedItemLocation = ""
+                DisplayLabel.Text = $"Stan's Grocery has {selectedItemName}, but it cannot be located."
+            Case Else
+                DisplayLabel.Text = $"{selectedItemName} is found on aisle {selectedItemLocation} with {selectedItemCategory}."
+        End Select
     End Sub
+
+    Function findArrayLocation(itemName As String) As Integer
+        Dim itemlocation As Integer
+        Dim currentItemName As String
+        For i = 0 To (currentInventory.GetLength(0) - 1)
+            currentItemName = currentInventory(i, 0)
+            If currentItemName = itemName Then
+                itemlocation = i
+            End If
+        Next
+        Return itemlocation
+    End Function
 
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
