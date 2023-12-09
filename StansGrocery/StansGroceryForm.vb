@@ -124,16 +124,25 @@ Public Class StansGroceryForm
     Sub UpdateDisplayComboBox()
         FilterComboBox.Items.Clear()
         If FilterByAisleRadioButton.Checked Then
+            Dim allAisleNumbers As New List(Of Integer)
             'add show all option
             FilterComboBox.Items.Add("Show All")
-            'fill combo box with categories
+            'fill combo box with aisle numbers
             For i = 0 To (currentInventory.GetLength(0) - 1)
                 Select Case True
                     Case currentInventory(i, 1) = "",
-                        FilterComboBox.Items.Contains(currentInventory(i, 1))
+                        allAisleNumbers.Contains(CInt(currentInventory(i, 1)))
+
                     Case Else
-                        FilterComboBox.Items.Add(currentInventory(i, 1))
+                        allAisleNumbers.Add(CInt(currentInventory(i, 1)))
+                        'FilterComboBox.Items.Add(currentInventory(i, 1))
                 End Select
+            Next
+            'sort aisle numbers
+            allAisleNumbers.Sort()
+            'update combo box
+            For i = 0 To (allAisleNumbers.Count - 1)
+                FilterComboBox.Items.Add(allAisleNumbers(i))
             Next
         Else
             'add show all option
@@ -148,6 +157,7 @@ Public Class StansGroceryForm
                 End Select
             Next
         End If
+
     End Sub
 
     'Event Handlers
