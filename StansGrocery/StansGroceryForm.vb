@@ -126,25 +126,26 @@ Public Class StansGroceryForm
         If FilterByAisleRadioButton.Checked Then
             'add show all option
             FilterComboBox.Items.Add("Show All")
-            'fill combo box with aisle numbers
+            'fill combo box with categories
             For i = 0 To (currentInventory.GetLength(0) - 1)
-                If FilterComboBox.Items.Contains(currentInventory(i, 1)) = False And
-                    currentInventory(i, 2) <> "" Then
-
-                    FilterComboBox.Items.Add(currentInventory(i, 1))
-                End If
+                Select Case True
+                    Case currentInventory(i, 1) = "",
+                        FilterComboBox.Items.Contains(currentInventory(i, 1))
+                    Case Else
+                        FilterComboBox.Items.Add(currentInventory(i, 1))
+                End Select
             Next
-            FilterComboBox.Items
         Else
             'add show all option
             FilterComboBox.Items.Add("Show All")
             'fill combo box with categories
             For i = 0 To (currentInventory.GetLength(0) - 1)
-                If FilterComboBox.Items.Contains(currentInventory(i, 2)) = False And
-                    currentInventory(i, 2) <> "" Then
-
-                    FilterComboBox.Items.Add(currentInventory(i, 2))
-                End If
+                Select Case True
+                    Case currentInventory(i, 2) = "",
+                        FilterComboBox.Items.Contains(currentInventory(i, 2))
+                    Case Else
+                        FilterComboBox.Items.Add(currentInventory(i, 2))
+                End Select
             Next
         End If
     End Sub
@@ -169,5 +170,10 @@ Public Class StansGroceryForm
     Private Sub AboutStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutStripMenuItem.Click
         'Display the About form to the user
         AboutForm.Show()
+    End Sub
+
+    Private Sub FilterByAisleRadioButton_CheckedChanged(sender As Object, e As EventArgs) Handles FilterByAisleRadioButton.CheckedChanged
+        'if the filter option is changed update combo box
+        UpdateDisplayComboBox()
     End Sub
 End Class
