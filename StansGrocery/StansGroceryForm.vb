@@ -65,10 +65,12 @@ Public Class StansGroceryForm
                 currentName = Replace(currentFields(0), "$$ITM", "")
                 currentLocation = Replace(currentFields(1), "##LOC", "")
                 currentCategory = Replace(currentFields(2), "%%CAT", "")
-                'add inventory items into lists
-                inventoryNames.Add(currentName)
-                inventoryLocation.Add(currentLocation)
-                inventoryCategory.Add(currentCategory)
+                'add inventory items into lists if they are not empty
+                If currentName <> "" Then
+                    inventoryNames.Add(currentName)
+                    inventoryLocation.Add(currentLocation)
+                    inventoryCategory.Add(currentCategory)
+                End If
             Loop
             FileClose(fileNumber)
         Catch ioexception As io.ioexception
