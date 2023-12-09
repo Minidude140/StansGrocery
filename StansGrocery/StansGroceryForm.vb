@@ -16,7 +16,7 @@ Imports System.Threading
 '[]Make splash screen
 '[]Create display sub that updates formated display label 
 
-'[]Update list box sub that updates from given array
+'[~]Update list box sub that updates from given array
 '[]Combo Box should contain either aisle numbers or category depending on radio buttons
 '[]Filter list box from combo box selection
 '[]Filter from search
@@ -103,11 +103,20 @@ Public Class StansGroceryForm
         inventoryCategory.Clear()
     End Sub
 
+    Sub UpdateDisplayListBox(listBoxArray As String(,))
+        'loop from 0 to the length of a specified dimension of the array
+        For i = 0 To (listBoxArray.GetLength(0) - 1)
+            'add the names of the array to the list box
+            DisplayListBox.Items.Add(listBoxArray(i, 0))
+        Next
+    End Sub
+
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
         LoadInventoryFile()
         AddInventoryListToArray()
+        UpdateDisplayListBox(currentInventory)
         'DisplayLabel.Text = testString
     End Sub
 
