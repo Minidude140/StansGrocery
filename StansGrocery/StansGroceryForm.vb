@@ -108,7 +108,7 @@ Public Class StansGroceryForm
     End Sub
 
     ''' <summary>
-    ''' Displays the every first element in the array into the display list box
+    ''' Displays filtered contents to the list box (show all, selected aisle, or selected category)
     ''' </summary>
     ''' <param name="listBoxArray"></param>
     Sub UpdateDisplayListBox()
