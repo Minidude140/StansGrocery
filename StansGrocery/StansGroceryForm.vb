@@ -14,7 +14,7 @@ Imports System.Threading
 '[~]Create array from lists and clear lists
 
 '[]Make splash screen
-'[]Create display sub that updates formated display label 
+'[~]Create display sub that updates formated display label 
 
 '[~]Update list box sub that updates from given array
 '[~]Combo Box should contain either aisle numbers or category depending on radio buttons
@@ -86,10 +86,6 @@ Public Class StansGroceryForm
             End With
         Catch ex As Exception
         End Try
-        'sort lists alphabetically
-        'inventoryNames.Sort()
-        'inventoryLocation.Sort()
-        'inventoryCategory.Sort()
     End Sub
 
     ''' <summary>
@@ -97,13 +93,15 @@ Public Class StansGroceryForm
     ''' Clears lists.
     ''' </summary>
     Sub AddInventoryListToArray()
+        'Resize current inventory array to list size
         ReDim currentInventory((inventoryNames.Count - 1), 2)
+        'iterate through lists and add them to the two dimensional array of current inventory
         For i = 0 To (inventoryNames.Count - 1)
             currentInventory(i, 0) = inventoryNames(i)
             currentInventory(i, 1) = inventoryLocation(i)
             currentInventory(i, 2) = inventoryCategory(i)
-            'System.Threading.Thread.Sleep(1000)
         Next
+        'clear lists to free memory
         inventoryNames.Clear()
         inventoryLocation.Clear()
         inventoryCategory.Clear()
@@ -119,6 +117,7 @@ Public Class StansGroceryForm
             'add the names of the array to the list box
             DisplayListBox.Items.Add(listBoxArray(i, 0))
         Next
+        'sort list box alphabetically
         DisplayListBox.Sorted = True
     End Sub
 
@@ -126,20 +125,23 @@ Public Class StansGroceryForm
     ''' Fills Filter Combo Box with Aisle Numbers or Categories depending on filter radio buttons
     ''' </summary>
     Sub UpdateFilterComboBox()
+        'clear any previous items in the combo box
         FilterComboBox.Items.Clear()
+
         If FilterByAisleRadioButton.Checked Then
+            'Fill Combo box with aisle numbers
             Dim allAisleNumbers As New List(Of Integer)
             'add show all option
             FilterComboBox.Items.Add("Show All")
-            'fill combo box with aisle numbers
+            'loop through inventory and add aisle numbers to list
             For i = 0 To (currentInventory.GetLength(0) - 1)
                 Select Case True
                     Case currentInventory(i, 1) = "",
                         allAisleNumbers.Contains(CInt(currentInventory(i, 1)))
-
+                        'Do nothing as aisle is already accounted for or empty
                     Case Else
+                        'add aisle number to list
                         allAisleNumbers.Add(CInt(currentInventory(i, 1)))
-                        'FilterComboBox.Items.Add(currentInventory(i, 1))
                 End Select
             Next
             'sort aisle numbers
@@ -149,14 +151,17 @@ Public Class StansGroceryForm
                 FilterComboBox.Items.Add(allAisleNumbers(i))
             Next
         Else
+            'Fill combo box with categories
             'add show all option
             FilterComboBox.Items.Add("Show All")
-            'fill combo box with categories
+            'loop through inventory and add categories to combo box
             For i = 0 To (currentInventory.GetLength(0) - 1)
                 Select Case True
                     Case currentInventory(i, 2) = "",
                         FilterComboBox.Items.Contains(currentInventory(i, 2))
+                        'Do nothing as category is already accounted for or empty
                     Case Else
+                        'add Category to list
                         FilterComboBox.Items.Add(currentInventory(i, 2))
                 End Select
             Next
@@ -171,16 +176,19 @@ Public Class StansGroceryForm
         Dim selectedItemName As String
         Dim selectedItemLocation As String
         Dim selectedItemCategory As String
-        Dim itemArrayLocation As Integer = findArrayLocation(DisplayListBox.SelectedItem.ToString)
-
+        'find the array element containing the selected item
+        Dim itemArrayLocation As Integer = findArrayIndex(DisplayListBox.SelectedItem.ToString)
+        'set temp strings for the name, location, and category of selected item
         selectedItemName = currentInventory(itemArrayLocation, 0)
         selectedItemLocation = currentInventory(itemArrayLocation, 1)
         selectedItemCategory = currentInventory(itemArrayLocation, 2)
-
+        'update display label accordingly
         Select Case True
             Case selectedItemCategory = "" Or selectedItemLocation = ""
+                'Item name is available, but the location or category is missing
                 DisplayLabel.Text = $"Stan's Grocery has {selectedItemName}, but it cannot be located."
             Case Else
+                'Item name is available and location is known
                 DisplayLabel.Text = $"{selectedItemName} is found on aisle {selectedItemLocation} with {selectedItemCategory}."
         End Select
     End Sub
@@ -190,15 +198,20 @@ Public Class StansGroceryForm
     ''' </summary>
     ''' <param name="itemName"></param>
     ''' <returns></returns>
-    Function findArrayLocation(itemName As String) As Integer
+    Function findArrayIndex(itemName As String) As Integer
         Dim itemlocation As Integer
         Dim currentItemName As String
+        'loop through inventory and check if any names match given parameter
         For i = 0 To (currentInventory.GetLength(0) - 1)
+            'set compare string to next array element
             currentItemName = currentInventory(i, 0)
+            'compare current array element with given parameter
             If currentItemName = itemName Then
+                'if equal item array location is equal to iteration count
                 itemlocation = i
             End If
         Next
+        'return array index 
         Return itemlocation
     End Function
 
