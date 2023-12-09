@@ -18,7 +18,7 @@ Imports System.Threading
 
 '[~]Update list box sub that updates from given array
 '[~]Combo Box should contain either aisle numbers or category depending on radio buttons
-'[]Filter list box from combo box selection
+'[~]Filter list box from combo box selection
 '[]Filter from search
 
 
@@ -111,12 +111,35 @@ Public Class StansGroceryForm
     ''' Displays the every first element in the array into the display list box
     ''' </summary>
     ''' <param name="listBoxArray"></param>
-    Sub UpdateDisplayListBox(listBoxArray As String(,))
-        'loop from 0 to the length of a specified dimension of the array
-        For i = 0 To (listBoxArray.GetLength(0) - 1)
-            'add the names of the array to the list box
-            DisplayListBox.Items.Add(listBoxArray(i, 0))
-        Next
+    Sub UpdateDisplayListBox()
+        DisplayListBox.Items.Clear()
+        Dim selectedFilter As String = FilterComboBox.SelectedItem.ToString
+        Select Case True
+            Case selectedFilter = "Show All"
+                'loop from 0 to the length of a specified dimension of the array
+                For i = 0 To (currentInventory.GetLength(0) - 1)
+                    'add the names of the array to the list box
+                    DisplayListBox.Items.Add(currentInventory(i, 0))
+                Next
+            Case FilterByAisleRadioButton.Checked = True
+                'display only items from selected aisle
+                Dim selectedAisle As String = selectedFilter
+                For i = 0 To (currentInventory.GetLength(0) - 1)
+                    'if item is in selected aisle add to list box
+                    If selectedAisle = currentInventory(i, 1) Then
+                        DisplayListBox.Items.Add(currentInventory(i, 0))
+                    End If
+                Next
+            Case FilterByCategoryRadioButton.Checked = True
+                'display only item from selected category
+                Dim selectedCategory As String = selectedFilter
+                For i = 0 To (currentInventory.GetLength(0) - 1)
+                    'if item is in selected category add to list
+                    If selectedCategory = currentInventory(i, 2) Then
+                        DisplayListBox.Items.Add(currentInventory(i, 0))
+                    End If
+                Next
+        End Select
         'sort list box alphabetically
         DisplayListBox.Sorted = True
     End Sub
@@ -217,10 +240,10 @@ Public Class StansGroceryForm
 
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
-        SetDefaults()
         LoadInventoryFile()
         AddInventoryListToArray()
-        UpdateDisplayListBox(currentInventory)
+        SetDefaults()
+        UpdateDisplayListBox()
         UpdateFilterComboBox()
         'DisplayLabel.Text = testString
     End Sub
@@ -245,5 +268,9 @@ Public Class StansGroceryForm
 
     Private Sub DisplayListBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DisplayListBox.SelectedIndexChanged
         UpdateDisplayLabel()
+    End Sub
+
+    Private Sub FilterComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FilterComboBox.SelectedIndexChanged
+        UpdateDisplayListBox()
     End Sub
 End Class
