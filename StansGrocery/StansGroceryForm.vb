@@ -109,6 +109,10 @@ Public Class StansGroceryForm
         inventoryCategory.Clear()
     End Sub
 
+    ''' <summary>
+    ''' Displays the every first element in the array into the display list box
+    ''' </summary>
+    ''' <param name="listBoxArray"></param>
     Sub UpdateDisplayListBox(listBoxArray As String(,))
         'loop from 0 to the length of a specified dimension of the array
         For i = 0 To (listBoxArray.GetLength(0) - 1)
@@ -117,12 +121,41 @@ Public Class StansGroceryForm
         Next
     End Sub
 
+    Sub UpdateDisplayComboBox()
+        FilterComboBox.Items.Clear()
+        If FilterByAisleRadioButton.Checked Then
+            'add show all option
+            FilterComboBox.Items.Add("Show All")
+            'fill combo box with aisle numbers
+            For i = 0 To (currentInventory.GetLength(0) - 1)
+                If FilterComboBox.Items.Contains(currentInventory(i, 1)) = False And
+                    currentInventory(i, 2) <> "" Then
+
+                    FilterComboBox.Items.Add(currentInventory(i, 1))
+                End If
+            Next
+            FilterComboBox.Items
+        Else
+            'add show all option
+            FilterComboBox.Items.Add("Show All")
+            'fill combo box with categories
+            For i = 0 To (currentInventory.GetLength(0) - 1)
+                If FilterComboBox.Items.Contains(currentInventory(i, 2)) = False And
+                    currentInventory(i, 2) <> "" Then
+
+                    FilterComboBox.Items.Add(currentInventory(i, 2))
+                End If
+            Next
+        End If
+    End Sub
+
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetDefaults()
         LoadInventoryFile()
         AddInventoryListToArray()
         UpdateDisplayListBox(currentInventory)
+        UpdateDisplayComboBox()
         'DisplayLabel.Text = testString
     End Sub
 
