@@ -242,6 +242,7 @@ Public Class StansGroceryForm
 
     Sub FilterBySearch()
         Dim searchString As String = Me.SeachTextBox.Text
+        Dim matchFound As Boolean = False
 
         DisplayListBox.Items.Clear()
         For i = 0 To (currentInventory.GetLength(0) - 1)
@@ -249,30 +250,30 @@ Public Class StansGroceryForm
             Dim currentName As String = currentInventory(i, 0)
             Dim currentLocation As String = currentInventory(i, 1)
             Dim currentCategory As String = currentInventory(i, 2)
-            Dim matchFound As Boolean = False
 
             Select Case searchString
                 Case currentName
                     'search string is current name
                     matchFound = True
+                    DisplayListBox.Items.Add(currentName)
                 Case currentLocation
                     'search string is current location
                     matchFound = True
+                    DisplayListBox.Items.Add(currentName)
                 Case currentCategory
                     matchFound = True
+                    DisplayListBox.Items.Add(currentName)
                     'search string is current category
                 Case Else
                     'search string was not found
-                    matchFound = False
             End Select
-            If matchFound = True Then
-                DisplayListBox.Items.Add(currentName)
-                Exit For
-            Else
-                DisplayListBox.Items.Clear()
-                DisplayLabel.Text = $"Sorry not match for {searchString} was found."
-            End If
         Next
+        'only display if match was not fund
+        If matchFound = True Then
+        Else
+            DisplayListBox.Items.Clear()
+            DisplayLabel.Text = $"Sorry not match for {searchString} was found."
+        End If
     End Sub
 
     'Event Handlers
