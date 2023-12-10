@@ -270,6 +270,7 @@ Public Class StansGroceryForm
         Next
         'only display if match was not fund
         If matchFound = True Then
+            DisplayLabel.Text = $"Showing Results for {searchString}."
         Else
             DisplayListBox.Items.Clear()
             DisplayLabel.Text = $"Sorry not match for {searchString} was found."
@@ -313,6 +314,7 @@ Public Class StansGroceryForm
     End Sub
 
     Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+        FilterComboBox.SelectedItem = "Show All"
         FilterBySearch()
     End Sub
 End Class
