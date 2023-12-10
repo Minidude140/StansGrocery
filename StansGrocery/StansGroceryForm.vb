@@ -6,6 +6,7 @@
 
 Option Strict On
 Option Explicit On
+Option Compare Text
 
 Imports System.Threading
 
