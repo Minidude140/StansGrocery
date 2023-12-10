@@ -240,6 +240,41 @@ Public Class StansGroceryForm
         Return itemlocation
     End Function
 
+    Sub FilterBySearch()
+        Dim searchString As String = Me.SeachTextBox.Text
+
+        DisplayListBox.Items.Clear()
+        For i = 0 To (currentInventory.GetLength(0) - 1)
+            'set variables for current Array item
+            Dim currentName As String = currentInventory(i, 0)
+            Dim currentLocation As String = currentInventory(i, 1)
+            Dim currentCategory As String = currentInventory(i, 2)
+            Dim matchFound As Boolean = False
+
+            Select Case searchString
+                Case currentName
+                    'search string is current name
+                    matchFound = True
+                Case currentLocation
+                    'search string is current location
+                    matchFound = True
+                Case currentCategory
+                    matchFound = True
+                    'search string is current category
+                Case Else
+                    'search string was not found
+                    matchFound = False
+            End Select
+            If matchFound = True Then
+                DisplayListBox.Items.Add(currentName)
+                Exit For
+            Else
+                DisplayListBox.Items.Clear()
+                DisplayLabel.Text = $"Sorry not match for {searchString} was found."
+            End If
+        Next
+    End Sub
+
     'Event Handlers
     Private Sub StansGroceryForm_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadInventoryFile()
@@ -274,5 +309,9 @@ Public Class StansGroceryForm
 
     Private Sub FilterComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles FilterComboBox.SelectedIndexChanged
         UpdateDisplayListBox()
+    End Sub
+
+    Private Sub SearchButton_Click(sender As Object, e As EventArgs) Handles SearchButton.Click
+        FilterBySearch()
     End Sub
 End Class

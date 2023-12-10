@@ -162,13 +162,13 @@ Partial Class StansGroceryForm
         'SearchStripMenuItem
         '
         Me.SearchStripMenuItem.Name = "SearchStripMenuItem"
-        Me.SearchStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.SearchStripMenuItem.Size = New System.Drawing.Size(136, 26)
         Me.SearchStripMenuItem.Text = "Search"
         '
         'ExitStripMenuItem
         '
         Me.ExitStripMenuItem.Name = "ExitStripMenuItem"
-        Me.ExitStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.ExitStripMenuItem.Size = New System.Drawing.Size(136, 26)
         Me.ExitStripMenuItem.Text = "Exit"
         '
         'HelpStripMenuItem
@@ -181,7 +181,7 @@ Partial Class StansGroceryForm
         'AboutStripMenuItem
         '
         Me.AboutStripMenuItem.Name = "AboutStripMenuItem"
-        Me.AboutStripMenuItem.Size = New System.Drawing.Size(224, 26)
+        Me.AboutStripMenuItem.Size = New System.Drawing.Size(133, 26)
         Me.AboutStripMenuItem.Text = "About"
         '
         'ContextMenuStrip1
