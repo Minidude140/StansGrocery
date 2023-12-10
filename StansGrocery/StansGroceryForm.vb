@@ -169,6 +169,8 @@ Public Class StansGroceryForm
             Next
             'sort aisle numbers
             allAisleNumbers.Sort()
+            'reverse aisle numbers into descending order
+            allAisleNumbers.Reverse()
             'update combo box
             For i = 0 To (allAisleNumbers.Count - 1)
                 FilterComboBox.Items.Add(allAisleNumbers(i))
