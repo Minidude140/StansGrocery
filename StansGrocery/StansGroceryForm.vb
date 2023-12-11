@@ -241,6 +241,10 @@ Public Class StansGroceryForm
         Return itemlocation
     End Function
 
+    ''' <summary>
+    ''' Evaluates the search text box and looks for any matches within the inventory 
+    ''' Adds matches to list box
+    ''' </summary>
     Sub FilterBySearch()
         Dim searchString As String = Me.SeachTextBox.Text
         Dim matchFound As Boolean = False
