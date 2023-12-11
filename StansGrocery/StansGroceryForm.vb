@@ -251,17 +251,21 @@ Public Class StansGroceryForm
             Dim currentName As String = currentInventory(i, 0)
             Dim currentLocation As String = currentInventory(i, 1)
             Dim currentCategory As String = currentInventory(i, 2)
+            Dim testVariable As Integer
+            testVariable = InStr(searchString, currentName, CompareMethod.Text)
 
-            Select Case searchString
-                Case currentName
+            Select Case True
+                Case InStr(currentName, searchString, CompareMethod.Text) > 0
                     'search string is current name
                     matchFound = True
                     DisplayListBox.Items.Add(currentName)
-                Case currentLocation
+                Case InStr(currentLocation, searchString, CompareMethod.Text) > 0
                     'search string is current location
                     matchFound = True
                     DisplayListBox.Items.Add(currentName)
-                Case currentCategory
+
+                Case InStr(currentCategory, searchString, CompareMethod.Text) > 0
+                    'currentCategory
                     matchFound = True
                     DisplayListBox.Items.Add(currentName)
                     'search string is current category
